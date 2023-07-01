@@ -12,10 +12,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Deploy static website to S3
-        # You may pin to the exact commit or the version.
-        # uses: eisberg-labs/static-website-to-s3@572aa2dbfd0718ff8ea1590b470285fc6df47779
-        uses: eisberg-labs/static-website-to-s3@v6
+      - uses: reggionick/s3-deploy@v3
+        name: Upload on S3
         with:
+          folder: .
           bucket: www.looplend.it
-          dest: ./
+          bucket-region: eu-west-1
