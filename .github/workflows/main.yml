@@ -24,4 +24,4 @@ jobs:
           # A Local Source Directory to Upload
           source: ./
           # A Remote Target Directory to Upload
-          target: .
+          target: ./
