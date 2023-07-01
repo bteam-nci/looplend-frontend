@@ -12,9 +12,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - uses: reggionick/s3-deploy@v3
-        name: Upload on S3
+      - name: AWS Deploy S3
+        # You may pin to the exact commit or the version.
+        # uses: oneyedev/aws-deploy-s3@16e61e78e12904502d31e6c4adbe1f7d58eddaa7
+        uses: oneyedev/aws-deploy-s3@v2
         with:
-          folder: .
+          # AWS Region of S3 Bucket
+          region: ew-west-1
+          # Name of S3 Bucket
           bucket: www.looplend.it
-          bucket-region: eu-west-1
+          # A Local Source Directory to Upload
+          source: ./
+          # A Remote Target Directory to Upload
+          target: .
