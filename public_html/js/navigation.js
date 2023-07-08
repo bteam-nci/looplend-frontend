@@ -17,7 +17,7 @@ export async function protectPage(){
 }
 
 export async function isLoggedIn(){
-	const session = await window.Clerk.session;
+	const session = window.Clerk.session;
 	return !!session;
 }
 

@@ -16,7 +16,9 @@ const startClerk = async () => {
 async function initUserFunctions(){
 	// mount button in dom
 	const button = document.getElementById("user-button");
-	window.Clerk.mountUserButton(button);
+	if (isLoggedIn()){
+		window.Clerk.mountUserButton(button);
+	}
 }
 
 (() => {
