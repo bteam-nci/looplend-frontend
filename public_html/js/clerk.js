@@ -18,7 +18,9 @@ async function initUserFunctions(){
 	const button = document.getElementById("user-button");
 	if (await isLoggedIn()){
 		document.getElementById("sign-in-link").hidden = true;
-		window.Clerk.mountUserButton(button);
+		window.Clerk.mountUserButton(button, {
+			afterSignOutUrl: "/index.html"
+		});
 	}
 }
 
