@@ -16,7 +16,7 @@ const startClerk = async () => {
 async function initUserFunctions(){
 	// mount button in dom
 	const button = document.getElementById("user-button");
-	if (isLoggedIn()){
+	if (await isLoggedIn()){
 		document.getElementById("sign-in-link").hidden = true;
 		window.Clerk.mountUserButton(button);
 	}
