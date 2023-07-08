@@ -17,6 +17,7 @@ async function initUserFunctions(){
 	// mount button in dom
 	const button = document.getElementById("user-button");
 	if (isLoggedIn()){
+		document.getElementById("sign-in-link").hidden = true;
 		window.Clerk.mountUserButton(button);
 	}
 }
