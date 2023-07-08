@@ -11,26 +11,14 @@ export async function protectPage(){
 	}
 	const Clerk = window.Clerk;
 	if (Clerk.isReady()) {
-		try {
-			const session = await Clerk.session.getToken();
-			console.log("Logged in user");
-			if (!session) {
-				window.location.href = "/login.html";
-			}
-		} catch (err) {
-			console.error("Error getting Clerk session: ", err);
-		}
+		const session = await Clerk.session.getToken();
+		console.log("Logged in user");
 	}
 }
 
 export async function isLoggedIn(){
-	try{
-		const session = await window.Clerk.session.getToken();
-		return !!session;
-	}catch (e) {
-		console.error("Error getting Clerk session: ", e);
-		return false;
-	}
+	const session = await window.Clerk.session;
+	return !!session;
 }
 
-export default protectPage;
+export default isLoggedIn;

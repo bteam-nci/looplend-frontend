@@ -1,4 +1,4 @@
-import {protectPage} from "./navigation.js";
+import {isLoggedIn, protectPage} from "./navigation.js";
 
 const publishableKey = "pk_test_bW9yYWwtbGlvbmVzcy01Mi5jbGVyay5hY2NvdW50cy5kZXYk";
 
@@ -9,11 +9,6 @@ const startClerk = async () => {
 		await Clerk.load();
 	} catch (err) {
 		console.error("Error starting Clerk: ", err);
-	}
-	try {
-		await protectPage();
-	}catch (e) {
-		console.error("Error getting Clerk session: ", e);
 	}
 	await initUserFunctions();
 };
