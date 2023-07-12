@@ -20,4 +20,17 @@ function sendDate() {
      * send data function
      */
 }
+
+/*
+ * keep the footer down
+ * 
+ */
+$(window).scroll(function() {
+    if ($(this).scrollTop() < 100) {
+        $(".footer").hide();
+    }
+    else {
+        $(".footer").show();
+    }
+});
   

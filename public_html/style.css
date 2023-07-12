@@ -24,6 +24,8 @@ header {
 
 footer {
     background-color: rgba(0, 163, 108, 100);
+    margin-top: auto;
+        width: 100%
 }
 
 .tagline {
@@ -93,3 +95,40 @@ input::placeholder, button {
     margin: 20px auto 20px;
     text-align: center;
 }
+
+/*
+css for the chat preview
+
+*/
+
+.chat-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .chat-item {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      padding: 10px;
+    }
+    
+    .chat-item:last-child {
+      border-bottom: none;
+    }
+    
+    .user-photo {
+      width: 60px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    
+    .chat-content {
+      flex: 1;
+    }
+    
+    .chat-item a {
+        text-decoration: none;
+        color: black;
+    }
+    
