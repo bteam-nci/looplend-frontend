@@ -3,17 +3,52 @@ import {initClerk} from "../clerk.js";
 import {listProduct, addToWishlist, removeFromWishlist} from "../api/products.js";
 import Loader from "../loader.js";
 
+const tmpParams = {
+	page: 1,
+}
 const params = {
 	page: 1,
 };
+
 let hasMore = true;
 const mainLoader = new Loader(document.querySelector("#products"));
 const scrollerLoader = new Loader(document.querySelector("#scrollspy-agent"));
 
 (() => {
 	initClerk(initProducts);
+	initComponents();
 })();
 
+
+function initComponents(){
+	// DATES
+	// set min date to today
+	const today = new Date();
+	const dd = String(today.getDate()).padStart(2, "0");
+	const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+	const yyyy = today.getFullYear();
+
+	document.querySelector("#start-date").setAttribute("min", `${yyyy}-${mm}-${dd}`);
+	// end date min date is start date
+	document.querySelector("#start-date").addEventListener("change", function(v){
+		document.querySelector("#end-date").setAttribute("min", v.target.value);
+		tmpParams.start = v.target.value;
+	});
+	document.querySelector("#end-date").addEventListener("change", function(v){
+		tmpParams.end = v.target.value;
+	});
+
+	// PRICE
+	document.querySelector("#price-range").addEventListener("input", function(v){
+		document.querySelector("#price-value").innerHTML = `${parseFloat(v.target.value/100).toFixed(0)} &euro;/day`;
+		tmpParams.price = v.target.value;
+	});
+
+	// CATEGORY
+	document.querySelector("#category").addEventListener("change", function(v){
+		tmpParams.category = parseInt( v.target.value);
+	});
+}
 function initProducts(){
 	if (isLoggedIn()){
 		mainLoader.start();

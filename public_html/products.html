@@ -16,35 +16,54 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="module"></script>
 </head>
 <body>
-    <header class="text-white sticky-top">
-        <div class="container d-flex align-items-center justify-content-between py-3">
-            <div class="logo">
-                <img src="images/logo.png" alt="Logo">
-            </div>
-            <nav class="navbar">
-                <a class="nav-link" href="#">Home</a>
-                <a class="nav-link" href="#">About</a>
-                <a class="nav-link" href="#">Contact</a>
-            </nav>
-            <div class="image" id="user-button">
-                <a id="sign-in-link" href="#" onclick="window.Clerk.openSignIn()">
-                    Sign in
-                </a>
-            </div>
-        </div>
+    <header include="fragments/header.html">
     </header>
     <main>
-        <div id="products">
-
+        <div id="search-filter" class="mb-2 justify-content-lg-evenly justify-content-center">
+            <div id="category" class="m-3">
+                <h3>
+                    What are you looking for?
+                </h3>
+                <select class="form-select" aria-label="Category" id="category-select">
+                    <option selected>----------</option>
+                    <option value="1">Sports</option>
+                    <option value="2">Tech</option>
+                    <option value="3">Crafts and Arts</option>
+                    <option value="4">Toys</option>
+                    <option value="5">Books and Movies</option>
+                    <option value="6">Homeware</option>
+                    <option value="7">Other</option>
+                </select>
+            </div>
+            <div id="dates" class="m-3">
+                <h3>
+                    When do you need it?
+                </h3>
+                <div id="dates-inputs">
+                    <div class="form-floating mb-3 mx-2">
+                        <input type="date" class="form-control" id="start-date">
+                        <label for="start-date">Start date</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="date" class="form-control" id="end-date">
+                        <label for="end-date">End date</label>
+                    </div>
+                </div>
+            </div>
+            <div id="price" class="m-3">
+                <h3>
+                    What is your budget?
+                </h3>
+                <span id="price-value">250 &euro;/day</span>
+                <input type="range" class="form-range" id="price-range" step="100" min="100" max="100000" placeholder="25000">
+            </div>
         </div>
-
+        <div id="products"></div>
         <div id="scrollspy-agent"></div>
     </main>
-    <footer class="text-white mt-3">
-        <div class="container py-2">
-            <p>&copy; <b>FOOTER</b></p>
-        </div>
+    <footer include="fragments/footer.html">
     </footer>
+    <script src="js/injecti.js"></script>
     <script src="js/pages/products.js" type="module"></script>
 </body>
 </html>
