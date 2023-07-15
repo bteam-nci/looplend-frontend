@@ -1,4 +1,4 @@
-import {isLoggedIn, protectPage} from "./navigation.js";
+import {isLoggedIn} from "./navigation.js";
 
 const publishableKey = "pk_test_bW9yYWwtbGlvbmVzcy01Mi5jbGVyay5hY2NvdW50cy5kZXYk";
 
@@ -13,6 +13,7 @@ const startClerk = async () => {
 	await initUserFunctions();
 };
 
+
 async function initUserFunctions(){
 	// mount button in dom
 	const button = document.getElementById("user-button");
@@ -24,15 +25,19 @@ async function initUserFunctions(){
 	}
 }
 
-(() => {
+export function initClerk(clerkLoadedCallback){
 	const script = document.createElement("script");
 	script.setAttribute("data-clerk-publishable-key", publishableKey);
 	script.async = true;
 	script.src = `https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js`;
 	script.crossOrigin = "anonymous";
-	script.addEventListener("load", startClerk);
+	script.addEventListener("load", ()=>{
+		startClerk().then(() => {
+			if(clerkLoadedCallback) clerkLoadedCallback();
+		});
+	});
 	script.addEventListener("error", () => {
 		document.getElementById("no-frontend-api-warning").hidden = false;
 	});
 	document.body.appendChild(script);
-})();
+}
