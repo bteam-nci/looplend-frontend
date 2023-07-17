@@ -2,7 +2,7 @@ import {initClerk} from "../clerk.js";
 import {listProduct, addToWishlist, removeFromWishlist, categories} from "../api/products.js";
 import Loader from "../loader.js";
 
-const params = {
+let params = {
 	page: 1,
 	priceEnd: 250 * 100
 };
@@ -11,12 +11,25 @@ let hasMore = true;
 const mainLoader = new Loader(document.querySelector("#products"));
 const scrollerLoader = new Loader(document.querySelector("#scrollspy-agent"));
 function init(){
+	initParams();
 	initClerk(initProducts);
 	initComponents();
 }
-document.addEventListener("DOMContentLoaded", init)
+document.addEventListener("DOMContentLoaded", init);
+
+const basicParams = ["page", "priceEnd", "category", "start", "end"];
 // INITS
+function initParams(){
+	const urlParams = new URLSearchParams(window.location.search);
+	params = Object.keys(Object.fromEntries(urlParams)).filter(k=> basicParams.includes(k)).reduce((acc, k)=>{
+		acc[k] = urlParams.get(k);
+		return acc;
+	}, {});
+}
+
 function initComponents(){
+	renderCategoryOptions();
+
 	// DATES
 	// set min date to today
 	const today = new Date();
@@ -35,9 +48,11 @@ function initComponents(){
 		params.end = v.target.value;
 		triggerSearch();
 	});
+	document.querySelector("#start-date").value = params.start ?? "";
+	document.querySelector("#end-date").value = params.end ?? "";
 
 	// PRICE
-	document.querySelector("#price-range").value = 250 * 100;
+	document.querySelector("#price-range").value = params.priceEnd ? parseInt(params.priceEnd) : 250 * 100;
 	document.querySelector("#price-range").addEventListener("input", function(v){
 		document.querySelector("#price-value").innerHTML = `${parseFloat(v.target.value/100).toFixed(0)} &euro;/day`;
 		params.priceEnd = v.target.value;
@@ -50,9 +65,10 @@ function initComponents(){
 		params.category = parseInt(v.target.value) > 0 ? v.target.value : undefined;
 		triggerSearch();
 	});
+	console.log(params.category)
+	document.querySelector("#category-select").value = params.category ?? 0;
 
 	document.querySelector("#reset-search").addEventListener("click", resetSearch);
-	renderCategoryOptions();
 }
 
 function initProducts(){
