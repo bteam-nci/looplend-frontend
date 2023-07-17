@@ -1,25 +1,21 @@
-import {isLoggedIn} from "../navigation.js";
 import {initClerk} from "../clerk.js";
-import {listProduct, addToWishlist, removeFromWishlist} from "../api/products.js";
+import {listProduct, addToWishlist, removeFromWishlist, categories} from "../api/products.js";
 import Loader from "../loader.js";
 
-const tmpParams = {
-	page: 1,
-}
 const params = {
 	page: 1,
+	priceEnd: 250 * 100
 };
 
 let hasMore = true;
 const mainLoader = new Loader(document.querySelector("#products"));
 const scrollerLoader = new Loader(document.querySelector("#scrollspy-agent"));
-
-(() => {
+function init(){
 	initClerk(initProducts);
 	initComponents();
-})();
-
-
+}
+document.addEventListener("DOMContentLoaded", init)
+// INITS
 function initComponents(){
 	// DATES
 	// set min date to today
@@ -32,42 +28,51 @@ function initComponents(){
 	// end date min date is start date
 	document.querySelector("#start-date").addEventListener("change", function(v){
 		document.querySelector("#end-date").setAttribute("min", v.target.value);
-		tmpParams.start = v.target.value;
+		params.start = v.target.value;
+		triggerSearch();
 	});
 	document.querySelector("#end-date").addEventListener("change", function(v){
-		tmpParams.end = v.target.value;
+		params.end = v.target.value;
+		triggerSearch();
 	});
 
 	// PRICE
+	document.querySelector("#price-range").value = 250 * 100;
 	document.querySelector("#price-range").addEventListener("input", function(v){
 		document.querySelector("#price-value").innerHTML = `${parseFloat(v.target.value/100).toFixed(0)} &euro;/day`;
-		tmpParams.price = v.target.value;
+		params.priceEnd = v.target.value;
+	});
+	document.querySelector("#price-range").addEventListener("change", function(v){
+		triggerSearch();
+	})
+	// CATEGORY
+	document.querySelector("#category-select").addEventListener("change", function(v){
+		params.category = parseInt(v.target.value) > 0 ? v.target.value : undefined;
+		triggerSearch();
 	});
 
-	// CATEGORY
-	document.querySelector("#category").addEventListener("change", function(v){
-		tmpParams.category = parseInt( v.target.value);
+	document.querySelector("#reset-search").addEventListener("click", resetSearch);
+	renderCategoryOptions();
+}
+
+function initProducts(){
+	mainLoader.start();
+	listProduct(params).then((response) => {
+		const {data, total} = response;
+		mainLoader.stop(()=>{
+			renderProducts(data);
+			initScrollSpy();
+		});
 	});
 }
-function initProducts(){
-	if (isLoggedIn()){
-		mainLoader.start();
-		listProduct(params).then((response) => {
-			const {data, total} = response;
-			mainLoader.stop(()=>{
-				renderProducts(data);
-				initScrollSpy();
-			});
-		});
-	}
-}
+
 function initScrollSpy(){
 	window.addEventListener("scroll", function() {
 		const documentHeight = document.documentElement.scrollHeight;
 		const viewportHeight = window.innerHeight;
 		const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 		const remainingHeight = documentHeight - (viewportHeight + scrollTop);
-		const threshold = 50;
+		const threshold = 100;
 		if (remainingHeight <= threshold && hasMore && !scrollerLoader.isLoading) {
 			scrollerLoader.start();
 			params.page++;
@@ -83,12 +88,54 @@ function initScrollSpy(){
 		}
 	});
 }
-function renderProducts(list){
-	const products = document.querySelector("#products");
-	list.forEach((product) => {
-		products.appendChild(renderProductCard(product));
+
+
+// SEARCH METHODS
+
+function disableInputs(){
+	document.querySelector("#start-date").setAttribute("disabled", true);
+	document.querySelector("#end-date").setAttribute("disabled", true);
+	document.querySelector("#price-range").setAttribute("disabled", true);
+	document.querySelector("#category").setAttribute("disabled", true);
+}
+
+function enableInputs(){
+	document.querySelector("#start-date").removeAttribute("disabled");
+	document.querySelector("#end-date").removeAttribute("disabled");
+	document.querySelector("#price-range").removeAttribute("disabled");
+	document.querySelector("#category").removeAttribute("disabled");
+}
+
+function triggerSearch() {
+	disableInputs();
+	mainLoader.start();
+	params.page = 1;
+	listProduct(params).then((response) => {
+		const {data, total} = response;
+		mainLoader.stop(()=>{
+			renderProducts(data);
+			initScrollSpy();
+			enableInputs();
+		});
 	});
 }
+
+function resetSearch(){
+	if (mainLoader.isLoading){
+		return;
+	}
+	document.querySelector("#start-date").value = "";
+	document.querySelector("#end-date").value = "";
+	document.querySelector("#price-range").value = 250 * 100;
+	document.querySelector("#price-value").innerHTML = `250 &euro;/day`;
+	document.querySelector("#category-select").value = "0";
+	params.start = undefined;
+	params.end = undefined;
+	params.price = undefined;
+	params.category = undefined;
+	triggerSearch();
+}
+
 
 export function toggleWishlist(product){
 	if (product.isWishlisted) {
@@ -108,7 +155,25 @@ export function toggleWishlist(product){
 	}
 }
 
-// render the product in a card
+
+
+// RENDER METHODS
+function renderCategoryOptions(){
+	const categorySelect = document.querySelector("#category-select");
+	categories.forEach((category, index) => {
+		const option = document.createElement("option");
+		option.value = index + 1;
+		option.innerHTML = category.name;
+		option.className = `cat-${category.category}`;
+		categorySelect.appendChild(option);
+	});
+}
+function renderProducts(list){
+	const products = document.querySelector("#products");
+	list.forEach((product) => {
+		products.appendChild(renderProductCard(product));
+	});
+}
 function renderProductCard(product){
 	const productElement = document.createElement("div");
 	productElement.dataset.id = product.id;
@@ -117,10 +182,11 @@ function renderProductCard(product){
 		<img src="${product.image}" alt="${product.name}">
 		<div class="product-info">
 			<div class="top-row">
-				<div class="price">${product.price} &euro;/day</div>
+				<div class="price cat-${categories[product.category - 1].category}">${product.price} &euro;/day</div>
+				<div class="category cat-${categories[product.category - 1].category}"><i class="${categories[product.category - 1].icon}"></i> </div>
 			</div>
 			<div class="bottom-row">
-				<div class="name">${product.name}</div>
+				<div class="name cat-${categories[product.category - 1].category}">${product.name}</div>
 				<button type="button" class="btn btn-danger m-2"><i class="bi bi-${product.isWishlisted?"heart-fill":"heart"}"></i></button>
 			</div>
 		</div>
@@ -128,3 +194,4 @@ function renderProductCard(product){
 	productElement.querySelector("button").addEventListener("click", () => toggleWishlist(product));
 	return productElement;
 }
+

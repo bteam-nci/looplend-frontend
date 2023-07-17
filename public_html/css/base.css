@@ -12,8 +12,13 @@ header {
     max-height: 64px;
 }
 
-.navbar a {
+.navbar  li>a {
     margin: 5px;
+    color: white;
+}
+.navbar-nav li>a:hover {
+    color: rgba(0, 163, 108, 100);
+    background-color: white;
 }
 
 footer {
@@ -26,7 +31,6 @@ input, button {
     padding: 5px;
     border-radius: 5px;
 }
-
 /*
 Button like signin
  */
@@ -39,9 +43,69 @@ Button like signin
     color: white;
     text-decoration: none;
 }
+#user-button{
+    margin: 6px;
+}
 #scrollspy-agent{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(0, 163, 108, 100);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(0 89 59);
+}
+
+/* CATEGORIES */
+
+/* Sports */
+.cat-sports {
+    background-color: #FF5733;
+    color: #FFFFFF;
+}
+
+/* Tech */
+.cat-tech {
+    background-color: #007BFF;
+    color: #FFFFFF;
+}
+
+/* Crafts and Arts */
+.cat-crafts-and-arts {
+    background-color: #F7DC6F;
+    color: #000000;
+}
+
+/* Toys */
+.cat-toys {
+    background-color: #FFC300;
+    color: #000000;
+}
+
+/* Books and Movies */
+.cat-books-and-movies {
+    background-color: #9B59B6;
+    color: #FFFFFF;
+}
+
+/* Homeware */
+.cat-homeware {
+    background-color: #27AE60;
+    color: #FFFFFF;
+}
+
+/* Other */
+.cat-other {
+    background-color: #BDC3C7;
+    color: #000000;
+}
+

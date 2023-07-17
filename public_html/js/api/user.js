@@ -1,19 +1,23 @@
-const baseUrl = 'https://xig8zm7fo3.execute-api.eu-west-1.amazonaws.com/dev';
+import api from './base.js';
 
-export async function getUserInfo(userId, token) {
-	const response = await fetch(`${baseUrl}/me`, {
-		headers: {
-			"Authorization": token
-		}
-	});
-	return response.json();
+export async function getUserInfo() {
+	const {data} = await api.get(`/me`);
+	return data;
 }
 
-export async function getUserRequests(userId, token) {
-	const response = await fetch(`${baseUrl}/me/requests`, {
-		headers: {
-			"Authorization": token
-		}
-	});
-	return response.json();
+export async function getUserProducts(params) {
+	console.log(params)
+	const {data} = await api.get(`/me/products`, {params});
+	return {
+		...data,
+		data: data.data.map((product) => ({
+			...product,
+			price: parseFloat(product.price / 100).toFixed(2)
+		}))
+	};
+}
+
+export async function getUserRequests(params) {
+	const {data} = await api.get(`/me/requests`, {params});
+	return data;
 }
