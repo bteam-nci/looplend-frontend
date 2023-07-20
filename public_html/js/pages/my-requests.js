@@ -1,13 +1,13 @@
 import {isLoggedIn} from "../navigation.js";
 import {initClerk} from "../clerk.js";
 import {getUserRequests} from "../api/user.js";
-import {acceptRequest, denyRequest} from "../api/requests.js";
+import {acceptRequest, denyRequest} from "../api/rentals.js";
 import Loader from "../loader.js";
 import {pushToast, initToaster} from "../toaster.js";
 
 let hasMore = true;
 let openedRequestActionModal = null;
-const mainLoader = new Loader(document.querySelector("#requests"));
+const mainLoader = new Loader(document.querySelector("#requests-list"));
 const scrollerLoader = new Loader(document.querySelector("#scrollspy-agent"));
 const modal = new bootstrap.Modal('#confirmActionModal');
 const params = {
@@ -18,6 +18,7 @@ function init(){
 	initToaster();
 	initClerk(initMyRequests);
 }
+
 document.addEventListener("DOMContentLoaded", init)
 
 function initMyRequests(){
@@ -30,6 +31,8 @@ function initMyRequests(){
 				initScrollSpy();
 			});
 		});
+	} else {
+		window.location.href = "home.html";
 	}
 }
 
@@ -63,12 +66,39 @@ function initScrollSpy(){
 }
 
 // should render products as list items
-function renderRequests(requests, isFirst = true){
-	const list = document.querySelector("#requests");
-	if (isFirst) list.innerHTML = `<h2 class="text-center">My Rental requests</h2>`
+function renderRequests(requests){
+	const list = document.querySelector("#requests-list");
 	requests.forEach((product) => {
 		list.appendChild(renderRequestLine(product));
 	});
+}
+
+function renderRating(number){
+	const stars = [];
+	let added = 0;
+	// filled
+	for(let i = 0; i < parseInt(number); i++){
+		const star = document.createElement('i');
+		star.classList.add("bi");
+		star.classList.add("bi-star-fill");
+		stars.push(star);
+	}
+	added = parseInt(number);
+	if(number > parseInt(number)){
+		const star = document.createElement('i');
+		star.classList.add("bi");
+		star.classList.add("bi-star-half");
+		stars.push(star);
+		added++;
+	}
+
+	for(let i = 0; i < 5 - added; i++){
+		const star = document.createElement('i');
+		star.classList.add("bi");
+		star.classList.add("bi-star");
+		stars.push(star);
+	}
+	return stars;
 }
 
 function renderRequestLine(request){
@@ -90,13 +120,13 @@ function renderRequestLine(request){
 	<div class="flex-grow-1">
 		<h5>${request.product.name}</h5>
 	</div>
-	<div>
-		<p class="text-muted">Total: ${request.total} &euro;</p>
-		<p class="text-muted">Dates: ${request.start} to ${request.end}</p>
-		<p class="text-muted">Borrower: ${request.borrower.fullName}</p>
+	<div class="d-flex flex-column">
+		<div class="text-muted">Total: ${request.total} &euro;</div>
+		<div class="text-muted">Dates: ${request.start} to ${request.end}</div>
+		<div class="text-muted">Borrower: ${request.borrower.name} <span class="rating"></span></div>
 	</div>
 </div>
-<div class="d-flex flex-row align-items-lg-end justify-content-center">
+<div class="d-flex flex-row align-items-lg-end justify-content-center requestActions">
 	<button class="btn btn-success confirmActionRequestButton mx-2" data-action="accept"> Accept</button>
 	<button class="btn btn-danger confirmActionRequestButton" data-action="deny"> Deny</button>
 </div>
@@ -108,6 +138,9 @@ function renderRequestLine(request){
 			openedRequestActionModal = request;
 			modal.show();
 		});
+	});
+	renderRating(request.borrower.rating).forEach(star=>{
+		item.querySelector(".rating").appendChild(star);
 	});
 	return item;
 }
@@ -168,6 +201,7 @@ function confirmAction(action){
 		productDiv.remove();
 		pushToast(`Request ${action === "deny"?"denied":"accepted"}`, "success", 2000);
 	}).catch(err =>{
+		console.log(err)
 		pushToast(err.response.data.message, "danger", 2000);
 	}).finally(()=>{
 		removeOverlay();

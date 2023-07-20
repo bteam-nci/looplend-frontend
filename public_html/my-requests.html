@@ -19,8 +19,13 @@
     <header include="fragments/header.html">
     </header>
     <main>
-        <div id="requests" class="container">
-            <div class="spinner-border" role="status">
+        <div id="requests" class="container d-flex flex-column">
+            <h2 class="text-center">My Rental requests</h2>
+            <div id="requests-list">
+                <div class="d-flex flex-row justify-content-center align-items-center">
+                    <div class="spinner-border" role="status">
+                    </div>
+                </div>
             </div>
         </div>
         <div id="scrollspy-agent"></div>

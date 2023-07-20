@@ -21,10 +21,12 @@ const basicParams = ["page", "priceEnd", "category", "start", "end"];
 // INITS
 function initParams(){
 	const urlParams = new URLSearchParams(window.location.search);
-	params = Object.keys(Object.fromEntries(urlParams)).filter(k=> basicParams.includes(k)).reduce((acc, k)=>{
-		acc[k] = urlParams.get(k);
-		return acc;
-	}, {});
+	if(Object.keys(urlParams).length > 0){
+		params = Object.keys(Object.fromEntries(urlParams)).filter(k=> basicParams.includes(k)).reduce((acc, k)=>{
+			acc[k] = urlParams.get(k);
+			return acc;
+		}, {});
+	}
 }
 
 function initComponents(){
@@ -65,7 +67,6 @@ function initComponents(){
 		params.category = parseInt(v.target.value) > 0 ? v.target.value : undefined;
 		triggerSearch();
 	});
-	console.log(params.category)
 	document.querySelector("#category-select").value = params.category ?? 0;
 
 	document.querySelector("#reset-search").addEventListener("click", resetSearch);

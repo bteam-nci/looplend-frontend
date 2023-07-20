@@ -6,7 +6,9 @@ export default class Loader {
 	start(){
 		this.isLoading = true;
 		this.element.innerHTML = `
-			<div class="spinner-border" role="status">
+			<div class="d-flex flex-row justify-content-center align-items-center">
+					<div class="spinner-border" role="status">
+					</div>
 			</div>
 		`;
 	}

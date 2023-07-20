@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="css/base.css" type="text/css"/>
-    <link rel="stylesheet" href="css/my-products.css" type="text/css"/>
+    <link rel="stylesheet" href="css/rentals.css" type="text/css"/>
 
     <title>Sample Webpack App</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
@@ -19,9 +19,22 @@
     <header include="fragments/header.html">
     </header>
     <main>
-        <div id="products" class="container d-flex flex-column">
-            <h2 class="text-center">My Products</h2>
-            <div id="products-list">
+        <div id="rentals" class="container d-flex flex-column">
+            <div class="d-flex flex-row">
+                <h2 class="text-center flex-grow-1">Rentals center</h2>
+                <div>
+                    <span class="text-muted"> Filter status: </span>
+                    <select class="form-select" aria-label="Status" id="status-select">
+                        <option selected value="0">All</option>
+                        <option>Pending</option>
+                        <option>Ongoing</option>
+                        <option>Upcoming</option>
+                        <option>Completed</option>
+                        <option>Denied</option>
+                    </select>
+                </div>
+            </div>
+            <div id="rentals-list" class="d-flex flex-column">
                 <div class="d-flex flex-row justify-content-center align-items-center">
                     <div class="spinner-border" role="status">
                     </div>
@@ -32,20 +45,7 @@
     </main>
     <footer include="fragments/footer.html">
     </footer>
-    <div class="modal fade" id="deleteProductModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Do you want to delete this product?</h1>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="confirmDeleteProductButton" class="btn btn-danger">Delete</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <script src="js/injecti.js"></script>
-    <script src="js/pages/my-products.js" type="module"></script>
+    <script src="js/pages/rentals.js" type="module"></script>
 </body>
 </html>

@@ -7,7 +7,7 @@ import {pushToast, initToaster} from "../toaster.js";
 
 let hasMore = true;
 let openedProductModalToDelete = null;
-const mainLoader = new Loader(document.querySelector("#products"));
+const mainLoader = new Loader(document.querySelector("#products-list"));
 const scrollerLoader = new Loader(document.querySelector("#scrollspy-agent"));
 const modal = new bootstrap.Modal('#deleteProductModal');
 const params = {
@@ -30,6 +30,8 @@ function initMyProducts(){
 				initScrollSpy();
 			});
 		});
+	} else {
+		window.location.href = "home.html";
 	}
 }
 
@@ -63,9 +65,8 @@ function initScrollSpy(){
 
 
 // should render products as list items
-function renderProducts(products, isFirst = true){
-	const list = document.querySelector("#products");
-	if (isFirst) list.innerHTML = `<h2 class="text-center">My Products</h2>`
+function renderProducts(products){
+	const list = document.querySelector("#products-list");
 	products.forEach((product) => {
 		list.appendChild(renderProductLine(product));
 	});
