@@ -24,7 +24,7 @@ function initMyRequests(){
 	if (isLoggedIn()){
 		mainLoader.start();
 		getUserRequests(params).then((response) => {
-			const {data, total} = response;
+			const {data} = response;
 			mainLoader.stop(()=>{
 				renderRequests(data);
 				initScrollSpy();

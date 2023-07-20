@@ -57,7 +57,7 @@ function initComponents(){
 		document.querySelector("#price-value").innerHTML = `${parseFloat(v.target.value/100).toFixed(0)} &euro;/day`;
 		params.priceEnd = v.target.value;
 	});
-	document.querySelector("#price-range").addEventListener("change", function(v){
+	document.querySelector("#price-range").addEventListener("change", function(){
 		triggerSearch();
 	})
 	// CATEGORY
@@ -74,7 +74,7 @@ function initComponents(){
 function initProducts(){
 	mainLoader.start();
 	listProduct(params).then((response) => {
-		const {data, total} = response;
+		const {data} = response;
 		mainLoader.stop(()=>{
 			renderProducts(data);
 			initScrollSpy();
@@ -126,7 +126,7 @@ function triggerSearch() {
 	mainLoader.start();
 	params.page = 1;
 	listProduct(params).then((response) => {
-		const {data, total} = response;
+		const {data} = response;
 		mainLoader.stop(()=>{
 			renderProducts(data);
 			initScrollSpy();
@@ -155,16 +155,16 @@ function resetSearch(){
 export function toggleWishlist(product){
 	if (product.isWishlisted) {
 		document.querySelector(`.product[data-id="${product.id}"] button`).innerHTML = `<i class="bi bi-heart"></i>`;
-		removeFromWishlist(product.id).then((response) => {
+		removeFromWishlist(product.id).then(() => {
 			product.isWishlisted = false;
-		}).catch((error) => {
+		}).catch(() => {
 			document.querySelector(`.product[data-id="${product.id}"] button`).innerHTML = `<i class="bi bi-heart-fill"></i>`;
 		});
 	}else{
 		document.querySelector(`.product[data-id="${product.id}"] button`).innerHTML = `<i class="bi bi-heart-fill"></i>`;
-		addToWishlist(product.id).then((response) => {
+		addToWishlist(product.id).then(() => {
 			product.isWishlisted = true;
-		}).catch((error) => {
+		}).catch(() => {
 			document.querySelector(`.product[data-id="${product.id}"] button`).innerHTML = `<i class="bi bi-heart"></i>`;
 		});
 	}
