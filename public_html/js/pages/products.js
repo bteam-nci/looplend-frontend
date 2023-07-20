@@ -105,7 +105,6 @@ function initScrollSpy(){
 	});
 }
 
-
 // SEARCH METHODS
 
 function disableInputs(){

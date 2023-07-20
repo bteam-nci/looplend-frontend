@@ -26,7 +26,7 @@ function initHeader(){
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="rentals.html">Past rentals</a>
-            <a class="dropdown-item" href="requests.html">Requests</a>
+            <a class="dropdown-item" href="my-requests.html">Requests</a>
           </div>
         </li>
         <li class="nav-item">
