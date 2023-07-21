@@ -4,61 +4,70 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
 -->
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css" type="text/css"/>
-        <title>Chats</title>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js, script." integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <script src="script.js"></script>
-        <div class="page-container">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Chats</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js, script."
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <script src="script.js"></script>
+    <div class="page-container">
         <header class="text-white">
             <div class="container d-flex align-items-center justify-content-between py-3">
                 <div class="logo">
                     <img src="logo.png" alt="Logo">
                 </div>
-                
+
                 <nav class="navbar">
                     <a class="nav-link" href="#">Home</a>
                     <a class="nav-link" href="#">About</a>
                     <a class="nav-link" href="#">Contact</a>
                 </nav>
-                
+
                 <div class="image">
                     <img src="user.png" alt="User">
                 </div>
             </div>
         </header>
-        
+
         <main>
             <div class="container">
-                
+
                 <ul class="chat-list"><!-- Chats previews -->
-                    
+
                     <li class="chat-item">
                         <a href="#"><img class="user-photo" src="user.png" alt="User 1"></a>
                         <a href="#">
                             <div class="chat-content">
                                 <h3 class="product-chat">Product name</h3>
-                                <h3 class="space"> - </h3><h3 class="user-chat">User 1</h3>
-                                
+                                <h3 class="space"> - </h3>
+                                <h3 class="user-chat">User 1</h3>
+
                             </div>
                             <p>Last message from User 1</p>
                         </a>
                     </li>
+
+                    
                 </ul>
             </div>
         </main>
-        
-        <footer class="text-white footer">
-            <div class="container py-2">
-                <p>&copy; <b>FOOTER</b></p>
-            </div>
-        </footer>
-            </div>
-    </body>
+    </div>
+    <footer class="text-white footer" style="position: absolute; bottom:0">
+        <div class="container py-2">
+            <p>&copy; <b>FOOTER</b></p>
+        </div>
+    </footer>
+</body>
+
 </html>
