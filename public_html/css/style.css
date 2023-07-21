@@ -6,8 +6,40 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
     Created on : 6 Jul 2023, 21:51:27
     Author     : minia
 */
+
+
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 4rem;
+  min-height: 100%;
+}
+
+
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+
+
+
+
+
+
+
+
 header {
   background-color: rgba(0, 163, 108, 100);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .logo img {
@@ -24,8 +56,9 @@ header {
 
 footer {
   background-color: rgba(0, 163, 108, 100);
-  margin-top: auto;
-  width: 100%
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .tagline {
@@ -36,7 +69,7 @@ footer {
   background-color: red;
 }
 
-.searchdate input,
+.searchDate input,
 button {
   background-color: rgba(0, 163, 108, 100);
   border: none;
@@ -68,7 +101,6 @@ button {
   border-radius: 15px;
 }
 
-/* Link Overlay */
 .square a {
   position: absolute;
   top: 0;
