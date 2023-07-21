@@ -152,7 +152,6 @@ function resetSearch(){
 	triggerSearch();
 }
 
-
 export function toggleWishlist(product){
 	if (product.isWishlisted) {
 		document.querySelector(`.product[data-id="${product.id}"] button`).innerHTML = `<i class="bi bi-heart"></i>`;
@@ -170,7 +169,6 @@ export function toggleWishlist(product){
 		});
 	}
 }
-
 
 
 // RENDER METHODS
