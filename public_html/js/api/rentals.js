@@ -16,7 +16,6 @@ export async function listRentals(params) {
   };
 }
 export async function acceptRequest(rentalId) {
-  console.log(rentalId);
   await api.post(`/rentals/${rentalId}/accept`);
 }
 
@@ -27,4 +26,8 @@ export async function denyRequest(rentalId) {
 function formatDate(date) {
   // DD/MM/YYYY
   return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+}
+export async function sendRequest(body) {
+  const {data} = await api.post(`/rentals`, body);
+  return data;
 }

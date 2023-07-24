@@ -81,21 +81,10 @@ The product name is on top of the image, the price is on the bottom of the image
     justify-content: space-between;
 }
 .product-info .top-row .category {
-    padding: 5px;
     font-size: 0.9rem;
     font-weight: bold;
-    margin: 5px;
     border-radius: 8px;
 }
-.product-info .top-row .price{
-    padding: 5px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    margin: 5px;
-    border-radius: 8px;
-}
-
-
 /* SEARCH BAR */
 #search-bar {
     background-color: rgba(0, 162, 108, 0.4);

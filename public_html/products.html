@@ -61,6 +61,35 @@
     </main>
     <footer include="fragments/footer.html">
     </footer>
+    <div class="modal fade" id="createRequestModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Request a rental for <span id="product-request-name"></span></h5>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-column">
+                        <div class="form-floating flex-row mb-3">
+                            <input type="date" class="form-control" id="start-date-request">
+                            <label for="start-date-request">Start date</label>
+                        </div>
+                        <div class="form-floating mb-3 flex-row">
+                            <input type="date" class="form-control" id="end-date-request">
+                            <label for="end-date-request">End date</label>
+                        </div>
+                        <div class="form-floating mb-3 flex-row">
+                            Days: <span id="total-days" class="fw-bold"></span> <br/>
+                            Total price: <span id="total-price" class="fw-bold"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="confirmRequestButton" class="btn btn-primary">Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="js/injecti.js"></script>
     <script src="js/pages/products.js" type="module"></script>
 </body>
