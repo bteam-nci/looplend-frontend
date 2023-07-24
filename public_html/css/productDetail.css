@@ -1,0 +1,148 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 12 Jul 2023, 22:59:24
+    Author     : nal connaughton
+*/
+
+header {
+    background-color: rgba(0, 163, 108, 100);
+}
+
+.logo img {
+    height: 70px;
+}
+
+.image img {
+    height: 70px;
+}
+
+.navbar a {
+    margin: 5px;
+}
+
+.flex-box{
+    display: flex;
+    margin: auto;
+    width: 300px;
+    
+}
+
+h3{
+    font-size: 20px;
+}
+
+.square{
+  position: absolute;
+  width: 30%;
+  height: 25%;
+  background-color: rgba(0, 163, 108, 100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  left: 250px;
+  top: 120px;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+.square1 {
+  position: absolute;
+  width: 30%;
+  height: 5%;
+  background-color: rgba(0, 163, 108, 100);
+  display: flex;
+  font-weight: bold;
+  right: 245px;
+  top: 120px;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+
+.square2 {
+  position: absolute;
+  width: 30%;
+  height: 5%;
+  background-color: rgba(0, 163, 108, 100);
+  display: flex;
+  font-weight: bold;
+  right: 245px;
+  top: 160px;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+.square3 {
+  position: absolute;
+  width: 30%;
+  height: 5%;
+  background-color: rgba(0, 163, 108, 100);
+  display: flex;
+  font-weight: bold;
+  right: 245px;
+  top: 200px;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+.request{
+  position: absolute;
+  width: 10%;
+  display: flex;
+  font-weight: bold;
+  right: 500px;
+  top: 240px;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.add{
+  position: absolute;
+  width: 15%;
+  display: flex;
+  font-weight: bold;
+  right: 245px;
+  top: 240px;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+
+.square4 {
+  position: absolute;
+  width: 61.5%;
+  height: 22%;
+  background-color: rgba(0, 163, 108, 100);
+  display: flex;
+  font-weight: bold;
+  right: 245px;
+  top: 280px;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+.square5 {
+  position: absolute;
+  width: 61.5%;
+  height: 20%;
+  background-color: rgba(0, 163, 108, 100);
+  display: flex;
+  font-weight: bold;
+  right: 245px;
+  top: 420px;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+footer {
+    background-color: rgba(0, 163, 108, 100);
+}
