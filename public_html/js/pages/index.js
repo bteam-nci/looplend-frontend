@@ -1,7 +1,9 @@
 import {initToaster} from "../toaster.js";
 import {categories} from "../api/products.js";
+import {initClerk} from "../clerk";
 
 function init(){
+	initClerk();
 	initToaster();
 	initComponents();
 }

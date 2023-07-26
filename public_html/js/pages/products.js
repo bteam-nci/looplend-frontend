@@ -16,7 +16,6 @@ const scrollerLoader = new Loader(document.querySelector("#scrollspy-agent"));
 
 function init(){
 	initParams();
-	console.log(params)
 	initToaster();
 	initClerk(initProducts);
 	initComponents();
