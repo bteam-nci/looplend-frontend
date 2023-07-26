@@ -49,6 +49,17 @@ export async function listProduct(params) {
 		}))
 	};
 }
+export async function getProduct(productId) {
+	const {data} = await api.get(`/products/${productId}`,{
+		params: {
+			extendedEntity: true
+		}
+	});
+	return {
+		...data,
+		price: parseFloat(data.price / 100).toFixed(2)
+	};
+}
 export async function addToWishlist(productId) {
 	const {data} = await api.post(`/products/${productId}/wishlist`);
 	return data;

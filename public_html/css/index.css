@@ -1,0 +1,76 @@
+/*
+    Created on : 6 Jul 2023, 21:51:27
+    Author     : minia
+*/
+#tagline{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/public_html/images/heroimg.jpg");
+    height: 30vh;
+
+    /* Position and center the image to scale nicely on all screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    color: white;
+}
+
+#when {
+    color: white;
+    background-color: rgba(0, 163, 108, 100);
+}
+
+#categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 20px;
+    width: 100%;
+}
+.category {
+    flex: 0 1 calc(23%);
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #ccc;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+}
+@media screen and (max-width: 768px) {
+    .category {
+        flex: 0 1 50%;
+    }
+}
+@media screen and (max-width: 992px) {
+    .category {
+        flex: 0 1 100%;
+    }
+}
+.category:hover {
+    cursor: pointer;
+    box-shadow: 0 0 10px #969696;
+}
+.category i{
+    font-size: 8rem;
+    margin-top: 20px;
+}
+.cat-info:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.cat-info {
+    transition: 0.3s;
+    color: white;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+}

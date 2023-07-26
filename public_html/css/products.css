@@ -36,8 +36,7 @@ The product name is on top of the image, the price is on the bottom of the image
 }
 .product:hover {
     cursor: pointer;
-    box-shadow: 0 0 10px #969696
-;
+    box-shadow: 0 0 10px #969696;
 }
 .product img{
     width: 100%;

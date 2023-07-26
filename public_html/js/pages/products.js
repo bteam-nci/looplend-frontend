@@ -13,11 +13,10 @@ let params = {
 let hasMore = true;
 const mainLoader = new Loader(document.querySelector("#products"));
 const scrollerLoader = new Loader(document.querySelector("#scrollspy-agent"));
-const modal = new bootstrap.Modal('#createRequestModal');
-let currentProductToRequest = null;
 
 function init(){
 	initParams();
+	console.log(params)
 	initToaster();
 	initClerk(initProducts);
 	initComponents();
@@ -28,11 +27,11 @@ const basicParams = ["page", "priceEnd", "category", "start", "end"];
 // INITS
 function initParams(){
 	const urlParams = new URLSearchParams(window.location.search);
-	if(Object.keys(urlParams).length > 0){
+	if(urlParams.size > 0){
 		params = Object.keys(Object.fromEntries(urlParams)).filter(k=> basicParams.includes(k)).reduce((acc, k)=>{
 			acc[k] = urlParams.get(k);
 			return acc;
-		}, {});
+		}, {page: 1, priceEnd: 250 * 100});
 	}
 }
 
@@ -46,10 +45,6 @@ function initComponents(){
 	const dd = String(today.getDate()).padStart(2, "0");
 	const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
 	const yyyy = today.getFullYear();
-	today.setDate(today.getDate() + 1);
-	const dd2 = String(today.getDate()).padStart(2, "0");
-	const mm2 = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-	const yyyy2 = today.getFullYear();
 
 	document.querySelector("#start-date").setAttribute("min", `${yyyy}-${mm}-${dd}`);
 	// end date min date is start date
@@ -82,26 +77,6 @@ function initComponents(){
 	document.querySelector("#category-select").value = params.category ?? 0;
 
 	document.querySelector("#reset-search").addEventListener("click", resetSearch);
-
-	document.querySelector("#start-date-request").addEventListener("change", function(v){
-		document.querySelector("#end-date-request").setAttribute("min", v.target.value);
-		changeTotalDays();
-	});
-	document.querySelector("#end-date-request").addEventListener("change", function(v){
-		document.querySelector("#start-date-request").setAttribute("max", v.target.value);
-		changeTotalDays();
-	});
-
-	document.querySelector("#confirmRequestButton").addEventListener("click", function(){
-		createRequest(document.querySelector("#start-date-request").value, document.querySelector("#end-date-request").value, currentProductToRequest.id);
-	});
-
-	document.querySelector("#start-date-request").setAttribute("min", `${yyyy}-${mm}-${dd}`);
-	document.querySelector("#end-date-request").setAttribute("min", `${yyyy2}-${mm2}-${dd2}`);
-	document.querySelector("#start-date-request").setAttribute("max", `${yyyy2}-${mm2}-${dd2}`);
-	document.querySelector("#start-date-request").setAttribute("value", `${yyyy}-${mm}-${dd}`);
-	document.querySelector("#end-date-request").setAttribute("value", `${yyyy2}-${mm2}-${dd2}`);
-	changeTotalDays();
 }
 
 function initProducts(){
@@ -203,36 +178,14 @@ export function toggleWishlist(product){
 }
 
 
-// REQUEST METHODS
-
-function createRequest(start, end, productId){
-	if (!isLoggedIn()){
-		pushToast( "You must be logged in to create a rental request", "danger", 2000);
-		return;
-	}
-
-	sendRequest({start, end, productId}).then(() => {
-		modal.hide();
-		pushToast("Rental request created", "success", 2000);
-	}).catch(err =>{
-		console.log(err);
-		pushToast(err.response.data.message, "danger", 2000);
-	});
-}
-
 // RENDER METHODS
-function changeTotalDays(){
-	const startDate = new Date(document.querySelector("#start-date-request").value);
-	const endDate = new Date(document.querySelector("#end-date-request").value);
-	const days = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
-	document.querySelector("#total-days").innerHTML = days;
-	if (!currentProductToRequest) return;
-	document.querySelector("#total-price").innerHTML = `${days * currentProductToRequest.price} &euro;`;
-}
 function renderCategoryOptions(){
 	const categorySelect = document.querySelector("#category-select");
 	categories.forEach((category, index) => {
 		const option = document.createElement("option");
+		if (parseInt(params.category) === index){
+			option.selected = true;
+		}
 		option.value = index + 1;
 		option.innerHTML = category.name;
 		option.className = `cat-${category.category}`;
@@ -269,10 +222,7 @@ function renderProductCard(product){
 	`;
 	productElement.querySelector("button").addEventListener("click", () => toggleWishlist(product));
 	productElement.addEventListener("dblclick",() => {
-		currentProductToRequest = product;
-		document.querySelector("#product-request-name").innerHTML = product.name;
-		changeTotalDays();
-		modal.show();
+		window.location.href = `product-detail.html?id=${product.id}`;
 	})
 	return productElement;
 }
