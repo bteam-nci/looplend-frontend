@@ -84,7 +84,7 @@ export function toggleWishlist(product){
 			});
 		}else{
 			document.querySelector(`#wishlist`).innerHTML = `<i class="bi bi-heart-fill"></i> Wishlisted`;
-			addToWishlist().then(() => {
+			addToWishlist(product.id).then(() => {
 				product.isWishlisted = true;
 			}).catch(() => {
 				document.querySelector(`#wishlist`).innerHTML = `<i class="bi bi-heart"></i> Add to Wishlist`;
