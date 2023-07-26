@@ -1,0 +1,27 @@
+#requests{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.small-product-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.small-product-image img{
+    height: 200px;
+    object-fit: cover;
+    width: 200px;
+    min-width: 200px;
+    border-radius: 8px;
+}
+
+@media screen and (min-width: 992px) {
+    .requestActions{
+        flex: 0 0 200px;
+        width: 200px;
+    }
+}

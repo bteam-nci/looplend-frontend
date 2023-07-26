@@ -1,0 +1,129 @@
+/*
+Class product is a card that contains the product image, name, price and a button to add the product to the wishlist.
+The container #products contains all the products by row, 4 products per row.
+The product image is the full width and the height of the image, on hover the image pops out.
+The product name is on top of the image, the price is on the bottom of the image.
+ */
+
+#products{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.product {
+    flex: 0 1 calc(23%);
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #ccc;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+@media screen and (max-width: 768px) {
+    .product {
+        flex: 0 1 50%;
+    }
+}
+@media screen and (max-width: 992px) {
+    .product {
+        flex: 0 1 100%;
+    }
+}
+.product:hover {
+    cursor: pointer;
+    box-shadow: 0 0 10px #969696;
+}
+.product img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter 0.2s ease-in-out;
+}
+
+.product:hover img{
+    filter: grayscale(0%);
+}
+
+.product-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.product-info .bottom-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.product-info .bottom-row .name{
+    padding: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 5px;
+    max-width: 75%;
+    border-radius: 8px;
+}
+.product-info .top-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.product-info .top-row .category {
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 8px;
+}
+/* SEARCH BAR */
+#search-bar {
+    background-color: rgba(0, 162, 108, 0.4);
+}
+#search-filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex:1;
+    flex-wrap: wrap;
+}
+#search-filter input {
+    font-size: 1.2rem;
+}
+#category {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#category option {
+    font-size: 1.2rem;
+}
+#price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#dates {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+#dates-inputs {
+    display: flex;
+    flex-direction: row;
+}
+#price-value{
+    font-weight: bold;
+    font-size: 1.2rem;
+}

@@ -6,46 +6,57 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/home.css" type="text/css"/>
+    <link rel="stylesheet" href="css/base.css" type="text/css"/>
+    <link rel="stylesheet" href="css/index.css" type="text/css"/>
 
-    <title>Sample Webpack App</title>
+    <title>Looplend</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
             crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="module"></script>
 </head>
 <body>
-    <header class="text-white">
-        <div class="container d-flex align-items-center justify-content-between py-3">
-            <div class="logo">
-                <img src="images/logo.png" alt="Logo">
+<header include="fragments/header.html">
+</header>
+<main>
+    <div id="home" class="d-flex flex-column">
+        <div id="tagline" class="d-flex flex-column align-items-center justify-content-center">
+            <h1>
+                LoopLend
+            </h1>
+            <h2>
+                The best way to lend and borrow
+            </h2>
+        </div>
+        <div id="when" class="d-flex flex-column py-2 align-items-center">
+            <h3>
+                When do you need it?
+            </h3>
+            <div class="container d-flex flex-row w-100">
+                <div class="form-floating mb-3 mx-2 flex-grow-1">
+                    <input type="date" class="form-control" id="start-date">
+                    <label for="start-date">Start date</label>
+                </div>
+                <div class="form-floating mb-3 flex-grow-1">
+                    <input type="date" class="form-control" id="end-date">
+                    <label for="end-date">End date</label>
+                </div>
             </div>
-            <nav class="navbar">
-                <a class="nav-link" href="#">Home</a>
-                <a class="nav-link" href="#">About</a>
-                <a class="nav-link" href="#">Contact</a>
-            </nav>
-            <div class="image" id="user-button">
-                <a id="sign-in-link" href="#" onclick="window.Clerk.openSignIn()">
-                    Sign in
-                </a>
+            <button type="button" id="search" class="btn btn-primary m-2">SEARCH</button>
+        </div>
+        <div id="categories" class="d-flex flex-column align-items-center my-2">
+            <h3>
+                What do you need?
+            </h3>
+            <div id="categories-list">
             </div>
         </div>
-    </header>
-    <main>
-        <div class="container">
-            <div class="tagline">
-                <p>Your tagline here</p>
-            </div>
-        </div>
-        <div class="container py-5">
-
-        </div>
-    </main>
-    <footer class="text-white fixed-bottom">
-        <div class="container py-2">
-            <p>&copy; <b>FOOTER</b></p>
-        </div>
-    </footer>
-    <script src="js/clerk.js" type="module"></script>
+    </div>
+    <div id="scrollspy-agent"></div>
+</main>
+<footer include="fragments/footer.html">
+</footer>
+<script src="js/injecti.js"></script>
+<script src="js/pages/index.js" type="module"></script>
 </body>
 </html>

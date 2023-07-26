@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/base.css" type="text/css"/>
+    <link rel="stylesheet" href="css/rentals.css" type="text/css"/>
+
+    <title>Looplend</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="module"></script>
+</head>
+<body>
+    <header include="fragments/header.html">
+    </header>
+    <main>
+        <div id="rentals" class="container d-flex flex-column">
+            <div class="d-flex flex-row">
+                <h2 class="text-center flex-grow-1">Rentals center</h2>
+                <div>
+                    <span class="text-muted"> Filter status: </span>
+                    <select class="form-select" aria-label="Status" id="status-select">
+                        <option selected value="0">All</option>
+                        <option>Pending</option>
+                        <option>Ongoing</option>
+                        <option>Upcoming</option>
+                        <option>Completed</option>
+                        <option>Denied</option>
+                    </select>
+                </div>
+            </div>
+            <div id="rentals-list" class="d-flex flex-column">
+                <div class="d-flex flex-row justify-content-center align-items-center">
+                    <div class="spinner-border" role="status">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="scrollspy-agent"></div>
+    </main>
+    <footer include="fragments/footer.html">
+    </footer>
+    <script src="js/injecti.js"></script>
+    <script src="js/pages/rentals.js" type="module"></script>
+</body>
+</html>
