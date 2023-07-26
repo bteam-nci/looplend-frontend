@@ -48,7 +48,7 @@ function initUserFunctions(){
 	if (isLoggedIn()){
 		document.getElementById("sign-in-link").hidden = true;
 		window.Clerk.mountUserButton(button, {
-			afterSignOutUrl: "./home.html",
+			afterSignOutUrl: "http://www.looplend.it",
 		});
 		window.Clerk.addListener((event) => {
 			if (event.user === null){
