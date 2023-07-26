@@ -1,6 +1,6 @@
 import {initToaster} from "../toaster.js";
 import {categories} from "../api/products.js";
-import {initClerk} from "../clerk";
+import {initClerk} from "../clerk.js";
 
 function init(){
 	initClerk();
