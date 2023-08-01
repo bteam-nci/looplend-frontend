@@ -15,7 +15,6 @@ function init(){
 }
 document.addEventListener("DOMContentLoaded", init);
 
-const basicParams = ["page", "priceEnd", "category", "start", "end"];
 // INITS
 function initParams(){
 	const urlParams = new URLSearchParams(window.location.search);

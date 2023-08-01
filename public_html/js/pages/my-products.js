@@ -37,6 +37,9 @@ function initMyProducts(){
 
 function initComponents(){
 	document.querySelector("#confirmDeleteProductButton").addEventListener("click", confirmDeleteProduct);
+	document.querySelector("#createButton").addEventListener("click", ()=>{
+		window.location.href = "create-product.html";
+	});
 }
 
 
@@ -98,13 +101,18 @@ function renderProductLine(product){
 	</div>
 </div>
 <div class="d-flex flex-row align-items-lg-end justify-content-center">
-	<a class="btn btn-primary mx-2" href="product-form.html?productId=${product.id}" role="button"><i class="bi bi-pencil-fill"></i> Edit</a>
+	<a class="btn btn-primary mx-2" href="create-product.html?id=${product.id}" role="button"><i class="bi bi-pencil-fill"></i> Edit</a>
 	<button class="btn btn-danger deleteProductButton" data-bs-toggle="modal" data-bs-target="#deleteProductModal"><i class="bi bi-trash-fill"></i> Delete</button>
 </div>
 		`;
 	item.querySelector(".deleteProductButton").addEventListener("click", (ev)=>{
 		openedProductModalToDelete = product;
 	});
+
+	item.querySelector(".deleteProductButton").addEventListener("click", (ev)=>{
+		openedProductModalToDelete = product;
+	});
+
 	return item;
 }
 

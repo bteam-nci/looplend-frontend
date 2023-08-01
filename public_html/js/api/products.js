@@ -72,3 +72,10 @@ export async function deleteProduct(productId) {
 	const {data} = await api.delete(`/products/${productId}`);
 	return data.products;
 }
+
+export async function createProduct(product) {
+	product.price = parseInt(parseFloat(product.price) * 100);
+	product.category = parseInt(product.category);
+	const {data} = await api.post('/products', product);
+	return data;
+}
