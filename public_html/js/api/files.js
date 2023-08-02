@@ -15,9 +15,10 @@ instance.interceptors.request.use(async (config) => {
 });
 
 
-export async function createUploadLink(filename){
+export async function createUploadLink(filename, file){
 	const {data} = await instance.post('/uploads', {
-		name: filename
+		name: filename,
+		type: file.type
 	});
 
 	return data.url;

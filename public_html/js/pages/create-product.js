@@ -1,6 +1,6 @@
 import {initClerk} from "../clerk.js";
 import {initToaster, pushToast} from "../toaster.js";
-import {categories, createProduct, deleteProduct, getProduct} from "../api/products.js";
+import {categories, createProduct, deleteProduct, editProduct, getProduct} from "../api/products.js";
 import {createUploadLink} from "../api/files.js";
 
 let product = {
@@ -96,14 +96,21 @@ function submitProduct(product) {
 		if (!link) {
 			return;
 		}
-		return axios.put(link, document.querySelector("#image-input").files[0],
-			{
-				headers: {
-					'Content-Type': 'application/octet-stream'
-				}
-			});
+		return fetch(link, {
+			method: "PUT",
+			body: document.querySelector("#image-input").files[0],
+			headers: {
+				"Content-Type": document.querySelector("#image-input").files[0].type,
+			},
+		});
 	}).then(() => {
+		return editProduct({
+			...product,
+			image: "https://looplend-file-uploader-looplendfileuploaderbucket-hg8ac49reg6b.s3.eu-west-1.amazonaws.com/uploads/"+product.id,
+		});
+	}).then(()=>{
 		pushToast("Product created", "success", 2000);
+		window.location.href = "/product-detail.html?id=" + product.id;
 	}).catch((err) => {
 		if (!product.id) {
 			const urlParams = new URLSearchParams(window.location.search);

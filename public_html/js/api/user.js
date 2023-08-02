@@ -6,8 +6,16 @@ export async function getUserInfo() {
 }
 
 export async function getUserProducts(params) {
-	console.log(params)
 	const {data} = await api.get(`/me/products`, {params});
+	return {
+		data: data.data.map((product) => ({
+			...product,
+			price: parseFloat(product.price / 100).toFixed(2)
+		}))
+	};
+}
+export async function getUserWishlist(params) {
+	const {data} = await api.get(`/me/wishlist`, {params});
 	return {
 		data: data.data.map((product) => ({
 			...product,

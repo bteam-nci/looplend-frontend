@@ -79,3 +79,13 @@ export async function createProduct(product) {
 	const {data} = await api.post('/products', product);
 	return data;
 }
+export async function editProduct(product) {
+	if (product.price) {
+		product.price = parseInt(parseFloat(product.price) * 100);
+	}
+	if (product.category) {
+		product.category = parseInt(product.category);
+	}
+	const {data} = await api.put(`/products/${product.id}`, product);
+	return data;
+}
