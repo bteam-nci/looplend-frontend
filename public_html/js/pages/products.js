@@ -221,6 +221,7 @@ function renderProductCard(product){
 	`;
 	productElement.querySelector("button").addEventListener("click", () => toggleWishlist(product));
 	productElement.addEventListener("click",() => {
+		if (isScrolling) return;
 		window.location.href = `product-detail.html?id=${product.id}`;
 	});
 	return productElement;

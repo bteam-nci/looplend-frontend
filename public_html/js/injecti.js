@@ -19,12 +19,23 @@ async function injectHTML(filePath,elem) {
 		console.error(err.message);
 	}
 }
+let isScrolling = false;
+let timerScroll = null;
 
 function injectAll() {
 	document.querySelectorAll("[include]")
 		.forEach((elem) => {
 			injectHTML(elem.getAttribute("include"),elem);
-		})
+		});
+	document.addEventListener("scroll",()=>{
+		isScrolling = true;
+		if (timerScroll !== null){
+			clearTimeout(timerScroll);
+		}
+		timerScroll = setTimeout(()=>{
+			isScrolling = false;
+		}, 100);
+	})
 }
 
 injectAll();
