@@ -110,7 +110,7 @@ function submitProduct(product) {
 		});
 	}).then(()=>{
 		pushToast("Product created", "success", 2000);
-		window.location.href = "/product-detail.html?id=" + product.id;
+		window.location.href = "product-detail.html?id=" + product.id;
 	}).catch((err) => {
 		if (!product.id) {
 			const urlParams = new URLSearchParams(window.location.search);

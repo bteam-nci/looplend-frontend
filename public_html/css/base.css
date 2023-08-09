@@ -109,3 +109,6 @@ Button like signin
     color: #000000;
 }
 
+.cursor-pointer{
+    cursor: pointer;
+}

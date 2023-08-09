@@ -75,3 +75,7 @@ export function initClerk(clerkLoadedCallback){
 	});
 	document.body.appendChild(script);
 }
+
+export function getUser(){
+	return window.Clerk.user;
+}

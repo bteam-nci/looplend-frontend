@@ -1,0 +1,18 @@
+.message {
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 500px;
+    overflow-wrap: break-word;
+}
+.from-me {
+    background-color: #eee;
+}
+.from-them {
+    background-color: #ddd;
+}
+.date {
+    font-size: 0.8em;
+    color: #777;
+    font-style: italic;
+}
