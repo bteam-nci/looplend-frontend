@@ -134,10 +134,7 @@ function renderRequestLine(request){
 	}
 </div>
 		`;
-	item.addEventListener("dblclick", (ev)=>{
-		window.location.href = `conversation.html?id=${request.id}`;
-	});
-	item.addEventListener("touchend", (ev)=>{
+	item.addEventListener("click", (ev)=>{
 		window.location.href = `conversation.html?id=${request.id}`;
 	});
 	item.querySelectorAll(".confirmActionRequestButton").forEach((button)=>{

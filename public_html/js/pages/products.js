@@ -220,11 +220,8 @@ function renderProductCard(product){
 		</div>
 	`;
 	productElement.querySelector("button").addEventListener("click", () => toggleWishlist(product));
-	productElement.addEventListener("dblclick",() => {
+	productElement.addEventListener("click",() => {
 		window.location.href = `product-detail.html?id=${product.id}`;
 	});
-	productElement.addEventListener("touchend",() => {
-		window.location.href = `product-detail.html?id=${product.id}`;
-	})
 	return productElement;
 }
