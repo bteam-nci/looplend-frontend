@@ -22,11 +22,12 @@ function init(){
 
 function sendFeedback(ownerFeedback, productFeedback){
 	showOverlay(document.querySelector("#feedback"));
-	Promise.all([
-		sendFeedbackToOwner(rentalId, ownerFeedback),
-		sendFeedbackToProduct(rentalId, productFeedback)
-	]).then(() => {
+	sendFeedbackToOwner(rentalId, ownerFeedback).then(() => {
+		return sendFeedbackToProduct(rentalId, productFeedback)
+	}).then(() => {
 		pushToast("Feedback sent", "success", 2000);
+	}).catch(err => {
+		pushToast(err.response.data.message, "danger", 2000);
 	}).finally(removeOverlay);
 }
 
