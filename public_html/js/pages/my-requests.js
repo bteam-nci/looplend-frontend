@@ -140,6 +140,7 @@ function renderRequestLine(request){
 	});
 	item.querySelectorAll(".confirmActionRequestButton").forEach((button)=>{
 		button.addEventListener("click", (ev)=>{
+			ev.stopPropagation();
 			const action = ev.target.getAttribute("data-action");
 			renderModal(action);
 			openedRequestActionModal = request;
@@ -205,7 +206,6 @@ function confirmAction(action){
 		functionToTake = denyRequest;
 	}
 	functionToTake(openedRequestActionModal.id).then(()=>{
-		productDiv.remove();
 		pushToast(`Request ${action === "deny"?"denied":"accepted"}`, "success", 2000);
 	}).catch(err =>{
 		console.log(err)

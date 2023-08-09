@@ -219,7 +219,10 @@ function renderProductCard(product){
 			</div>
 		</div>
 	`;
-	productElement.querySelector("button").addEventListener("click", () => toggleWishlist(product));
+	productElement.querySelector("button").addEventListener("click", (e) => {
+		e.stopPropagation();
+		toggleWishlist(product);
+	});
 	productElement.addEventListener("click",() => {
 		if (isScrolling) return;
 		window.location.href = `product-detail.html?id=${product.id}`;

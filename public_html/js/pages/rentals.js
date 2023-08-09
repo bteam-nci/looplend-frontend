@@ -123,7 +123,7 @@ function renderRentalLine(rental){
 	let backgroundStatus = "primary";
 	if(rental.status === "DENIED") backgroundStatus = "danger";
 	if(rental.status === "PENDING") backgroundStatus = "warning";
-	if(rental.status === "COMPLETED") backgroundStatus = "SUCCESS";
+	if(rental.status === "COMPLETED") backgroundStatus = "success";
 
 	item.innerHTML = `
 <div class="small-product-image">
@@ -135,14 +135,25 @@ function renderRentalLine(rental){
 		<div class="text-muted"><span class="badge rounded-pill bg-${backgroundStatus}">${rental.status}</span></div>
 		<div class="text-italic">Created at: ${rental.createdAt}</div>
 	</div>
-	<div class="d-flex flex-column">
+	<div class="d-flex flex-row align-items-end">
+<div class="d-flex flex-column flex-grow-1">
 		<div class="text-muted">Total: ${rental.total} &euro;</div>
 		<div class="text-muted">Dates: ${rental.start} to ${rental.end}</div>
 		<div class="text-muted">Owner: ${rental.owner.name}</div>
 		<div class="text-muted">Product rating: <span class="rating"></span></div>	
+</div>
+<div>
+${rental.status === "COMPLETED" ? `<button class="btn btn-primary send-feedback">Send feedback</button>` : ""}
+</div>
 	</div>
 </div>
 		`;
+	if (rental.status === "COMPLETED"){
+		item.querySelector(".send-feedback").addEventListener("click", (ev)=>{
+			ev.stopPropagation();
+			window.location.href = `feedback.html?id=${rental.id}`;
+		});
+	}
 	item.addEventListener("click", (ev)=>{
 		window.location.href = `conversation.html?id=${rental.id}`;
 	});

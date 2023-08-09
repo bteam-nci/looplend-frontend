@@ -34,6 +34,13 @@ export async function denyRequest(rentalId) {
   await api.delete(`/rentals/${rentalId}`);
 }
 
+export async function sendFeedbackToOwner(rentalId, feedback) {
+  return api.post(`/rentals/${rentalId}/owner/feedbacks`, feedback);
+}
+export async function sendFeedbackToProduct(rentalId, feedback) {
+  return api.post(`/rentals/${rentalId}/product/feedbacks`, feedback);
+}
+
 function formatDate(date) {
   // DD/MM/YYYY
   return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
