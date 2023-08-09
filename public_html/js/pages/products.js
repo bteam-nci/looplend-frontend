@@ -222,6 +222,9 @@ function renderProductCard(product){
 	productElement.querySelector("button").addEventListener("click", () => toggleWishlist(product));
 	productElement.addEventListener("dblclick",() => {
 		window.location.href = `product-detail.html?id=${product.id}`;
+	});
+	productElement.addEventListener("touchend",() => {
+		window.location.href = `product-detail.html?id=${product.id}`;
 	})
 	return productElement;
 }

@@ -146,6 +146,9 @@ function renderRentalLine(rental){
 	item.addEventListener("dblclick", (ev)=>{
 		window.location.href = `conversation.html?id=${rental.id}`;
 	});
+	item.addEventListener("touchend", (ev)=>{
+		window.location.href = `conversation.html?id=${rental.id}`;
+	});
 	renderRating(rental.product.rating).forEach(star=>{
 		item.querySelector(".rating").appendChild(star);
 	});

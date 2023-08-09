@@ -137,6 +137,9 @@ function renderRequestLine(request){
 	item.addEventListener("dblclick", (ev)=>{
 		window.location.href = `conversation.html?id=${request.id}`;
 	});
+	item.addEventListener("touchend", (ev)=>{
+		window.location.href = `conversation.html?id=${request.id}`;
+	});
 	item.querySelectorAll(".confirmActionRequestButton").forEach((button)=>{
 		button.addEventListener("click", (ev)=>{
 			const action = ev.target.getAttribute("data-action");
