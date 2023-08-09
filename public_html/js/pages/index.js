@@ -1,7 +1,6 @@
 import {initToaster} from "../toaster.js";
 import {categories} from "../api/products.js";
 import {initClerk} from "../clerk.js";
-
 function init(){
 	initClerk();
 	initToaster();
@@ -10,6 +9,8 @@ function init(){
 document.addEventListener("DOMContentLoaded", init)
 
 function initComponents(){
+
+
 	const categoriesElement = document.querySelector("#categories-list");
 	categories.forEach((category,index) => {
 		categoriesElement.appendChild(createCategoryElem(category,index));
@@ -58,6 +59,7 @@ function createCategoryElem(cat, index){
 	`;
 	// catElement.querySelector("button").addEventListener("click", () => {});
 	catElement.addEventListener("click", () => {
+		if (isScrolling) return;
 		window.location.href = `products.html?category=${index+1}`;
 	});
 	return catElement;
