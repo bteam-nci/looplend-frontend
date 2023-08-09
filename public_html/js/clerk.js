@@ -30,7 +30,7 @@ function initHeader(){
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="wishlist.html">Wishlist</a>
+          <a class="nav-link" href="my-wishlist.html">Wishlist</a>
         </li>`;
 		document.querySelector(".navbar-nav").insertAdjacentHTML("beforeend", elementsToAdd);
 	}
@@ -74,4 +74,8 @@ export function initClerk(clerkLoadedCallback){
 		document.getElementById("no-frontend-api-warning").hidden = false;
 	});
 	document.body.appendChild(script);
+}
+
+export function getUser(){
+	return window.Clerk.user;
 }

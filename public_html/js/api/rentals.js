@@ -15,6 +15,17 @@ export async function listRentals(params) {
     }))
   };
 }
+
+export async function getRental(rentalId) {
+  const {data} = await api.get(`/rentals/${rentalId}`);
+  return {
+    ...data,
+    total: parseFloat(data.total / 100).toFixed(2),
+    start: formatDate(new Date(data.start)),
+    end: formatDate(new Date(data.end)),
+    createdAt: formatDate(new Date(data.createdAt))
+  }
+}
 export async function acceptRequest(rentalId) {
   await api.post(`/rentals/${rentalId}/accept`);
 }

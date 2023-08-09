@@ -113,6 +113,7 @@ function renderRentalLine(rental){
 	item.classList.add("d-flex");
 	item.classList.add("flex-column");
 	item.classList.add("flex-lg-row");
+	item.classList.add("cursor-pointer");
 	item.classList.add("justify-content-between");
 	item.classList.add("position-relative");
 	item.classList.add("my-2");
@@ -142,6 +143,12 @@ function renderRentalLine(rental){
 	</div>
 </div>
 		`;
+	item.addEventListener("dblclick", (ev)=>{
+		window.location.href = `conversation.html?id=${rental.id}`;
+	});
+	item.addEventListener("touchend", (ev)=>{
+		window.location.href = `conversation.html?id=${rental.id}`;
+	});
 	renderRating(rental.product.rating).forEach(star=>{
 		item.querySelector(".rating").appendChild(star);
 	});

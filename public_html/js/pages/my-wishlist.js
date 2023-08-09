@@ -1,7 +1,7 @@
 import {isLoggedIn} from "../navigation.js";
 import {initClerk} from "../clerk.js";
-import {getUserProducts} from "../api/user.js";
-import {deleteProduct, categories} from "../api/products.js";
+import {getUserProducts, getUserWishlist} from "../api/user.js";
+import {categories, removeFromWishlist} from "../api/products.js";
 import Loader from "../loader.js";
 import {pushToast, initToaster} from "../toaster.js";
 
@@ -9,13 +9,11 @@ let hasMore = true;
 let openedProductModalToDelete = null;
 const mainLoader = new Loader(document.querySelector("#products-list"));
 const scrollerLoader = new Loader(document.querySelector("#scrollspy-agent"));
-const modal = new bootstrap.Modal('#deleteProductModal');
 const params = {
 	page: 1,
 }
 function init(){
 	initClerk(initMyProducts);
-	initComponents();
 	initToaster();
 }
 document.addEventListener("DOMContentLoaded", init)
@@ -23,8 +21,8 @@ document.addEventListener("DOMContentLoaded", init)
 function initMyProducts(){
 	if (isLoggedIn()){
 		mainLoader.start();
-		getUserProducts(params).then((response) => {
-			const {data, total} = response;
+		getUserWishlist(params).then((response) => {
+			const {data} = response;
 			mainLoader.stop(()=>{
 				renderProducts(data);
 				initScrollSpy();
@@ -35,12 +33,6 @@ function initMyProducts(){
 	}
 }
 
-function initComponents(){
-	document.querySelector("#confirmDeleteProductButton").addEventListener("click", confirmDeleteProduct);
-	document.querySelector("#createButton").addEventListener("click", ()=>{
-		window.location.href = "create-product.html";
-	});
-}
 
 
 function initScrollSpy(){
@@ -101,14 +93,12 @@ function renderProductLine(product){
 	</div>
 </div>
 <div class="d-flex flex-row align-items-lg-end justify-content-center">
-	<a class="btn btn-primary mx-2" href="create-product.html?id=${product.id}" role="button"><i class="bi bi-pencil-fill"></i> Edit</a>
-	<button class="btn btn-danger deleteProductButton" data-bs-toggle="modal" data-bs-target="#deleteProductModal"><i class="bi bi-trash-fill"></i> Delete</button>
+	<button class="btn btn-danger deleteProductButton"><i class="bi bi-trash-fill"></i> Remove</button>
 </div>
 		`;
 	item.querySelector(".deleteProductButton").addEventListener("click", (ev)=>{
-		openedProductModalToDelete = product;
+		confirmDeleteProduct(product);
 	});
-
 	return item;
 }
 
@@ -142,14 +132,13 @@ function createOverlayElement(){
 
 	return overlay;
 }
-function confirmDeleteProduct(){
+function confirmDeleteProduct(product){
 	// gray out the product div
-	const productDiv = document.querySelector(`#products div[data-id="${openedProductModalToDelete.id}"]`);
+	const productDiv = document.querySelector(`#products div[data-id="${product.id}"]`);
 	showOverlay(productDiv);
-	modal.hide();
 	// send a request to delete the product
 	// if successful, remove the product div
-	deleteProduct(openedProductModalToDelete.id).then(()=>{
+	removeFromWishlist(product.id).then(()=>{
 		productDiv.remove();
 	}).catch(err =>{
 		pushToast(err.response.data.message, "danger", 2000);

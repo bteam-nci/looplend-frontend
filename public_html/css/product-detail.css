@@ -11,6 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
   height: 100%;
   object-fit: cover;
   max-width: 350px;
+    max-height: 350px;
 }
 
 .category {

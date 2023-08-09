@@ -107,6 +107,7 @@ function renderRequestLine(request){
 	item.classList.add("flex-lg-row");
 	item.classList.add("flex-column");
 	item.classList.add("justify-content-between");
+	item.classList.add("cursor-pointer");
 	item.classList.add("position-relative");
 	item.classList.add("my-2");
 	item.classList.add("p-2");
@@ -127,10 +128,18 @@ function renderRequestLine(request){
 	</div>
 </div>
 <div class="d-flex flex-row align-items-lg-end justify-content-center requestActions">
-	<button class="btn btn-success confirmActionRequestButton mx-2" data-action="accept"> Accept</button>
-	<button class="btn btn-danger confirmActionRequestButton" data-action="deny"> Deny</button>
+	${
+		request.status === "PENDING"? `<button class="btn btn-success confirmActionRequestButton mx-2" data-action="accept"> Accept</button>
+	<button class="btn btn-danger confirmActionRequestButton" data-action="deny"> Deny</button>`:`<div class="text-muted">${request.status}</div>`
+	}
 </div>
 		`;
+	item.addEventListener("dblclick", (ev)=>{
+		window.location.href = `conversation.html?id=${request.id}`;
+	});
+	item.addEventListener("touchend", (ev)=>{
+		window.location.href = `conversation.html?id=${request.id}`;
+	});
 	item.querySelectorAll(".confirmActionRequestButton").forEach((button)=>{
 		button.addEventListener("click", (ev)=>{
 			const action = ev.target.getAttribute("data-action");
