@@ -105,7 +105,7 @@ function submitProduct(product) {
 		});
 	}).then(() => {
 		return editProduct({
-			...product,
+			id: product.id,
 			image: "https://looplend-file-uploader-looplendfileuploaderbucket-hg8ac49reg6b.s3.eu-west-1.amazonaws.com/uploads/"+product.id,
 		});
 	}).then(()=>{
