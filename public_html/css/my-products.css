@@ -21,7 +21,7 @@
 }
 
 @media screen and (min-width: 992px) {
-    #products>div>div:last-child{
+    .requestActions{
         flex: 0 0 200px;
         width: 200px;
     }

@@ -100,7 +100,7 @@ function renderProductLine(product){
 		<div class="badge rounded-pill cat-${categories[product.category - 1].category}"><i class="${categories[product.category - 1].icon}"></i> ${categories[product.category - 1].name}</div>
 	</div>
 </div>
-<div class="d-flex flex-row align-items-lg-end justify-content-center">
+<div class="d-flex flex-row align-items-lg-end justify-content-center requestActions">
 	<a class="btn btn-primary mx-2" href="create-product.html?id=${product.id}" role="button"><i class="bi bi-pencil-fill"></i> Edit</a>
 	<button class="btn btn-danger deleteProductButton" data-bs-toggle="modal" data-bs-target="#deleteProductModal"><i class="bi bi-trash-fill"></i> Delete</button>
 </div>
